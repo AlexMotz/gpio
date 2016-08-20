@@ -23,7 +23,7 @@ const (
 )
 
 func exportGPIO(p Pin) {
-	export, err := os.OpenFile("/sys/class/gpio/export", os.O_WRONLY, 0600)
+	export, err := os.OpenFile("/sys/class/gpio/export", os.O_WRONLY, 0660)
 	if err != nil {
 		fmt.Printf("failed to open gpio export file for writing\n")
 		os.Exit(1)
@@ -33,7 +33,7 @@ func exportGPIO(p Pin) {
 }
 
 func unexportGPIO(p Pin) {
-	export, err := os.OpenFile("/sys/class/gpio/unexport", os.O_WRONLY, 0600)
+	export, err := os.OpenFile("/sys/class/gpio/unexport", os.O_WRONLY, 0660)
 	if err != nil {
 		fmt.Printf("failed to open gpio unexport file for writing\n")
 		os.Exit(1)
@@ -43,7 +43,7 @@ func unexportGPIO(p Pin) {
 }
 
 func setDirection(p Pin, d direction, initialValue uint) {
-	dir, err := os.OpenFile(fmt.Sprintf("/sys/class/gpio/gpio%d/direction", p.Number), os.O_WRONLY, 0600)
+	dir, err := os.OpenFile(fmt.Sprintf("/sys/class/gpio/gpio%d/direction", p.Number), os.O_WRONLY, 0660)
 	if err != nil {
 		fmt.Printf("failed to open gpio %d direction file for writing\n", p.Number)
 		os.Exit(1)
