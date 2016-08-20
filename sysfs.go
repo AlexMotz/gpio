@@ -63,7 +63,7 @@ func setDirection(p Pin, d direction, initialValue uint) {
 }
 
 func setEdgeTrigger(p Pin, e edge) {
-	edge, err := os.OpenFile(fmt.Sprintf("/sys/class/gpio/gpio%d/edge", p.Number), os.O_WRONLY, 0600)
+	edge, err := os.OpenFile(fmt.Sprintf("/sys/class/gpio/gpio%d/edge", p.Number), os.O_WRONLY, 0660)
 	if err != nil {
 		fmt.Printf("failed to open gpio %d edge file for writing\n", p.Number)
 		os.Exit(1)
@@ -89,7 +89,7 @@ func openPin(p Pin, write bool) Pin {
 	if write {
 		flags = os.O_RDWR
 	}
-	f, err := os.OpenFile(fmt.Sprintf("/sys/class/gpio/gpio%d/value", p.Number), flags, 0600)
+	f, err := os.OpenFile(fmt.Sprintf("/sys/class/gpio/gpio%d/value", p.Number), flags, 0660)
 	if err != nil {
 		fmt.Printf("failed to open gpio %d value file for reading\n", p.Number)
 		os.Exit(1)
