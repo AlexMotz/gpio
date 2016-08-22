@@ -32,7 +32,7 @@ func exportGPIO(p Pin) {
 	defer export.Close()
 	export.Write([]byte(strconv.Itoa(int(p.Number))))
 
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(50 * time.Millisecond)
 }
 
 func unexportGPIO(p Pin) {
